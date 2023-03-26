@@ -25,7 +25,7 @@ def menu():
         # показать все записи
         if menu_item == 1:
             print('Весь перечень заметок:')
-            f.get_all_notes('notes.csv')
+            f.print_notes('notes.csv')
             print('Вы будете перемещены в главное меню.\n')
             continue
 
