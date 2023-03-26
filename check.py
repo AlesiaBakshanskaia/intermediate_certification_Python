@@ -2,9 +2,9 @@ import functions as f
 from os import path
 
 
-def check_type_num(data: str) -> int:
-    if data.isdigit():
-        return int(data)
+def check_menu_item(menu_item: str) -> int:
+    if menu_item.isdigit():
+        return int(menu_item)
     return -1
 
 # проверка существования id
