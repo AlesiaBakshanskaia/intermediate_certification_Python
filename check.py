@@ -8,12 +8,10 @@ def check_menu_item(menu_item: str) -> int:
     return -1
 
 # проверка существования id
-def check_id_exist(file, id: int) -> int:
-    list_all_notes = f.read_file(file)
-    temp = str(id)
+def check_id_exist(id: int, id_list: list) -> int:
     count = 0
-    for i in range(1, len(list_all_notes)):
-        if list_all_notes[i][0] == temp:
+    for i in range(len(id_list)):
+        if int(id_list[i]) == id:
             count += 1
     if count > 0:
         return id

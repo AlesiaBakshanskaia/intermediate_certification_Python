@@ -41,7 +41,7 @@ def read_file(file):
                 all_notes.append(list_pers)
         return all_notes
     else:
-        logging.error(f'Файл {file} не существует')
+        logging.error('Error. File does not exist')
         print("Файл не существует")
 
 # вывод всех заметок
@@ -59,6 +59,7 @@ def print_notes(file):
 
 def find_info(file, data):
     find_list = []
+    find_id_list = []
     list_all_notes = read_file(file)
     for i in range(1, len(list_all_notes)):
         for j in range(len(list_all_notes[i])):
@@ -66,14 +67,16 @@ def find_info(file, data):
                 pass
             else:
                 find_list.append(list_all_notes[i])
+                find_id_list.append(list_all_notes[i][0])
                 break
     for k in range(len(find_list)+1):
         if k == 0:
             write_file_w('file_for_search.csv', list_all_notes[k])
         else:
             write_file('file_for_search.csv', find_list[k-1])
-    print('Информация по вашему запросу.')
+    print('Информация по вашему запросу:')
     print_notes('file_for_search.csv')
+    return find_id_list
 
 
 # дозапись
@@ -84,13 +87,13 @@ def add_text(file):
     with open('last_id.txt', 'w', encoding='utf-8') as l_f:
         l_f.write(id_w)
     date = get_date()
-    note = input('Введите заметку: ')
-    status = input('Введите статус: ')
+    note = (input('Введите заметку: ')).lower()
+    status = (input('Введите статус: ')).lower()
     new_person = [id, date, note, status]
     write_file(file, new_person)
     print('Заметка успешно добавлена')
     print('Обновлённый список заметок')
-    print_notes('notes.csv')
+    print_notes(file)
 
 # замена
 
@@ -101,12 +104,12 @@ def change_info(file, id, operation):
         if list_all_notes[i][0] == str(id):
             list_all_notes[i][1] = get_date()
             if operation == 1:
-                list_all_notes[i][2] = input('Перепешите заметку: ')
+                list_all_notes[i][2] = input('Перепешите заметку: ').lower()
             elif operation == 2:
-                list_all_notes[i][3] = input('Измените статус заметки: ')
+                list_all_notes[i][3] = input('Измените статус заметки: ').lower()
             elif operation == 3:
-                list_all_notes[i][2] = input('Перепешите заметку: ')
-                list_all_notes[i][3] = input('Измените статус заметки: ')
+                list_all_notes[i][2] = input('Перепешите заметку: ').lower()
+                list_all_notes[i][3] = input('Измените статус заметки: ').lower()
 
     for j in range(len(list_all_notes)):
         if j == 0:
@@ -115,14 +118,14 @@ def change_info(file, id, operation):
             write_file(file, list_all_notes[j])
     print('Заметка успешно изменена')
     print('Обновлённый список заметок')
-    print_notes('notes.csv')
+    print_notes(file)
 
 
 # удаление
-def delete_info(file, m_id):
+def delete_info(file, id):
     ist_all_notes = read_file(file)
     for i in range(1, len(ist_all_notes)):
-        if ist_all_notes[i][0] == str(m_id):
+        if ist_all_notes[i][0] == str(id):
             ist_all_notes.pop(i)
             break
     for j in range(len(ist_all_notes)):
@@ -131,8 +134,8 @@ def delete_info(file, m_id):
         else:
             write_file(file, ist_all_notes[j])
     print('Заметка успешно удалена')
-    print('Обновлённый список заметок"')
-    print_notes('notes.csv')
+    print('Обновлённый список заметок')
+    print_notes(file)
     
 
 def get_date():
