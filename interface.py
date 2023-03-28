@@ -15,7 +15,7 @@ def menu():
                           '4 - Редактировать запись\n'
                           '5 - Удалить запись\n'
                           '0 - Выход\n')
-        menu_item = check.ccheck_is_digit(menu_item)
+        menu_item = check.check_is_digit(menu_item)
 
         if menu_item not in range(6):
             logging.warning('Warning: menu item does not exist')
@@ -33,7 +33,6 @@ def menu():
             find_id_list = f.find_info('notes.csv', data)
             if len(find_id_list) == 0:
                print('По вашему запросу ничего не найдено.\n')
-            else: print('Информация по вашему запросу.\n')
             print('Вы будете перемещены в главное меню.\n')
 
         # добавить запись
@@ -49,7 +48,6 @@ def menu():
             if len(find_list_id) == 0:
                 print("По вашему запросу ничего не найдено")
             else:
-                print("Информация по вашему запросу.")
                 entered_id = (input(
                     'Введите id записи, данные которой вы хотите изменить:\n')).lower()
                 id = check.check_is_digit(entered_id)
