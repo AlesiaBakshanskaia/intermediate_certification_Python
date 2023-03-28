@@ -15,7 +15,7 @@ def menu():
                           '4 - Редактировать запись\n'
                           '5 - Удалить запись\n'
                           '0 - Выход\n')
-        menu_item = check.check_menu_item(menu_item)
+        menu_item = check.ccheck_is_digit(menu_item)
 
         if menu_item not in range(6):
             logging.warning('Warning: menu item does not exist')
@@ -52,7 +52,7 @@ def menu():
                 print("Информация по вашему запросу.")
                 entered_id = (input(
                     'Введите id записи, данные которой вы хотите изменить:\n')).lower()
-                id = check.check_menu_item(entered_id)
+                id = check.check_is_digit(entered_id)
                 if id == -1:
                     logging.warning('Warning: Incorrect data entered')
                     print('Вы ввели некорректные данные\n')
@@ -66,7 +66,7 @@ def menu():
                                     '1 - Изменить заметку\n'
                                     '2 - Изменить статус заметки\n'
                                     '3 - Изменить все данные\n')
-                        int_change_item = check.check_menu_item(change_item)
+                        int_change_item = check.check_is_digit(change_item)
                         if int_change_item in range(1, 4):
                             f.change_info('notes.csv', id, int_change_item)
                         else:
@@ -83,7 +83,7 @@ def menu():
                 print("По вашему запросу ничего не найдено")
             else:
                 entered_id = (input('Введите id записи, которую хотите удалить:\n')).lower()
-                id = check.check_menu_item(entered_id)
+                id = check.check_is_digit(entered_id)
 
                 if id == -1:
                     logging.warning('Warning: Incorrect data entered')

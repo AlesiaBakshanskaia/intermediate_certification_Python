@@ -2,7 +2,7 @@ import functions as f
 from os import path
 
 
-def check_menu_item(menu_item: str) -> int:
+def check_is_digit(menu_item: str) -> int:
     if menu_item.isdigit():
         return int(menu_item)
     return -1
